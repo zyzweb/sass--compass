@@ -1,0 +1,47 @@
+@charset "utf-8";//一定要加; 编码问题需要添加
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+//scss 对css3中的import进行了重新的定义
+//1.当@import 后边跟的文件名是以.css结尾的时候！
+//2.当@import后边跟的是http:/∥开头的字符串的时候！
+//3.当@import后边跟的是一个url（）函数的时候。
+//4.当@import后边带有media queries的时候。
+//没有文件后缀名的时候，sass会添加.scss或者.sass的后缀
+// @import 'variables'; //screen.scss为宿主文件
+// @import "compass/reset";
+@import 'variables','mixin','compass/reset'; //一定要加;
+
+
+
+.main-sec {
+    font-family: $main-sec-ff;
+    .headline {
+        font: {
+            family: $headline-ff;//属性也能嵌套
+            size: 16px;
+        }
+    }
+}
+
+p {
+    color: hsl(270, 100%, 50%)
+}
+
+.webdemo-sec {
+    // @include col();//用@include来引用mixin  要加() 
+    @include col-sm(30%); //media query会被提到样式表的最外层 abcd  30px   30  30%
+    &:hover {
+        background-color:#f5f5f5;
+    }
+}
+
+%error { //%专门用来继承不会输出到css
+    color: #f00;
+}
+.serious-error {
+    @extend %error; //继承.error类的样式
+    border: 1px solid #000;
+}

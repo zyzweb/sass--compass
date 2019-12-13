@@ -1,0 +1,23 @@
+@charset "utf-8";
+@mixin col($width: 50%) { //mixin和函数混合使用 支持默认参数
+    width: $width;
+    float: left;
+}
+
+@mixin col-sm($width: 50%) {
+    @if type-of($width) != number {
+        @error "$width必须是一个数值类型,你输入的width是: #{$width}";
+    }
+    @if not unitless($width) { //取反用not
+        @if unit($width) != "%" {
+            @error "$width应该是一个百分值,你输入的width是: #{$width}";
+        }
+    } @else {
+        @warn "$width应该是一个百分值,你输入的width是: #{$width}";
+        $width:(percentage($width)/100);
+    }
+    @media(min-width: 768px) {
+        width: $width;
+        float: left;
+    }
+}
